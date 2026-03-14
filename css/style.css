@@ -1027,15 +1027,103 @@ ul { list-style: none; }
 }
 
 /* ============================================================
+   CONTACT — CARTES
+   ============================================================ */
+.contact-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  max-width: 860px;
+  margin: 0 auto 32px;
+}
+.contact-card {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  background: var(--white);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 36px 32px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+}
+.contact-card:hover {
+  border-color: var(--blue);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+.contact-card--linkedin:hover { border-color: #0077B5; }
+.contact-card__icon {
+  width: 64px;
+  height: 64px;
+  background: rgba(45,111,163,.1);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue);
+  flex-shrink: 0;
+}
+.contact-card--linkedin .contact-card__icon {
+  background: rgba(0,119,181,.1);
+  color: #0077B5;
+}
+.contact-card__icon svg { width: 32px; height: 32px; }
+.contact-card__body { flex: 1; }
+.contact-card__body h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+.contact-card__body p {
+  font-size: .875rem;
+  color: var(--text-mid);
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+.contact-card__action {
+  font-family: 'Poppins', sans-serif;
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--blue);
+}
+.contact-card--linkedin .contact-card__action { color: #0077B5; }
+.contact-card__arrow {
+  color: var(--text-light);
+  flex-shrink: 0;
+  transition: color var(--transition), transform var(--transition);
+}
+.contact-card__arrow svg { width: 22px; height: 22px; }
+.contact-card:hover .contact-card__arrow {
+  color: var(--blue);
+  transform: translateX(4px);
+}
+.contact-card--linkedin:hover .contact-card__arrow { color: #0077B5; }
+.contact__location {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: .85rem;
+  color: var(--text-light);
+  margin-top: 8px;
+}
+
+/* ============================================================
    RESPONSIVE — NOUVEAUX ÉLÉMENTS
    ============================================================ */
 @media (max-width: 1024px) {
   .enjeux__grid   { grid-template-columns: repeat(2, 1fr); }
   .articles__grid { grid-template-columns: repeat(2, 1fr); }
+  .contact-cards  { grid-template-columns: 1fr; max-width: 560px; }
 }
 @media (max-width: 768px) {
   .enjeux__grid     { grid-template-columns: 1fr; }
   .articles__grid   { grid-template-columns: 1fr; }
+  .contact-card     { flex-direction: column; text-align: center; padding: 28px 20px; }
+  .contact-card__arrow { display: none; }
   .photo-banner     { height: 260px; }
   .photo-banner--short { height: 200px; }
   .approche__actions { flex-direction: column; }
