@@ -51,12 +51,14 @@ if (form) {
     const json = JSON.stringify(object);
 
     try {
+      console.log('[Web3Forms] Envoi en cours…', object);
       const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: json
       });
       const result = await res.json();
+      console.log('[Web3Forms] Réponse :', result);
 
       if (result.success) {
         btn.textContent = 'Message envoyé ✓';
@@ -68,11 +70,13 @@ if (form) {
         btn.textContent = 'Erreur — réessayez';
         btn.disabled = false;
         btn.style.background = '#c0392b';
+        console.error('[Web3Forms] Échec :', result.message);
       }
-    } catch {
+    } catch (err) {
       btn.textContent = 'Erreur réseau — réessayez';
       btn.disabled = false;
       btn.style.background = '#c0392b';
+      console.error('[Web3Forms] Erreur réseau :', err);
     }
   });
 }
