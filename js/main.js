@@ -37,16 +37,42 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 fadeEls.forEach(el => observer.observe(el));
 
-// ---- Contact form (placeholder) ----
+// ---- Contact form — Web3Forms ----
 const form = document.getElementById('contact-form');
 if (form) {
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = form.querySelector('button[type="submit"]');
-    btn.textContent = 'Message envoyé ✓';
+    btn.textContent = 'Envoi en cours…';
     btn.disabled = true;
-    btn.style.background = '#2D6FA3';
-    btn.style.borderColor = '#2D6FA3';
-    btn.style.color = '#fff';
+
+    const data = new FormData(form);
+    const object = Object.fromEntries(data);
+    const json = JSON.stringify(object);
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: json
+      });
+      const result = await res.json();
+
+      if (result.success) {
+        btn.textContent = 'Message envoyé ✓';
+        btn.style.background = '#2D6FA3';
+        btn.style.borderColor = '#2D6FA3';
+        btn.style.color = '#fff';
+        form.reset();
+      } else {
+        btn.textContent = 'Erreur — réessayez';
+        btn.disabled = false;
+        btn.style.background = '#c0392b';
+      }
+    } catch {
+      btn.textContent = 'Erreur réseau — réessayez';
+      btn.disabled = false;
+      btn.style.background = '#c0392b';
+    }
   });
 }
