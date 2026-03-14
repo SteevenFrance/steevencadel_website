@@ -409,58 +409,77 @@
   <!-- ===== CONTACT ===== -->
   <section class="contact section" id="contact">
     <div class="container">
-      <div class="section-head">
-        <p class="section-label">Travaillons ensemble</p>
-        <h2 class="section-title">Prendre contact</h2>
-        <p class="section-sub">Chaque situation est unique. Échangeons sur vos enjeux pour définir ensemble l'accompagnement le plus adapté à votre équipe.</p>
+      <div class="contact__grid">
+
+        <!-- Infos gauche -->
+        <div class="contact__left">
+          <p class="section-label">Travaillons ensemble</p>
+          <h2 class="section-title">Prendre contact</h2>
+          <p class="contact__desc">Chaque situation est unique. Échangeons sur vos enjeux pour définir ensemble l'accompagnement le plus adapté à votre équipe.</p>
+
+          <div class="contact__info">
+            <div class="contact__info-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+              </svg>
+              <span>France — Paris / Nantes (présentiel) &amp; distanciel</span>
+            </div>
+            <div class="contact__info-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 8l10 7 10-7"/>
+              </svg>
+              <a href="mailto:contact@steevencadel.fr">contact@steevencadel.fr</a>
+            </div>
+            <div class="contact__info-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+              </svg>
+              <a href="https://linkedin.com/in/steeven-cadel" target="_blank" rel="noopener">linkedin.com/in/steeven-cadel</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Formulaire Netlify -->
+        <form class="contact__form" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" id="contact-form">
+          <input type="hidden" name="form-name" value="contact" />
+          <p style="display:none"><input name="bot-field" /></p>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nom">Nom *</label>
+              <input type="text" id="nom" name="nom" placeholder="Votre nom" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="email" placeholder="votre@email.com" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="entreprise">Entreprise / Organisation</label>
+            <input type="text" id="entreprise" name="entreprise" placeholder="Nom de votre organisation" />
+          </div>
+          <div class="form-group">
+            <label for="sujet">Sujet *</label>
+            <select id="sujet" name="sujet" required>
+              <option value="" disabled selected>Choisissez un service</option>
+              <option value="Accompagnement d'équipe">Accompagnement d'équipe</option>
+              <option value="Insights Discovery">Insights Discovery</option>
+              <option value="Médiation Professionnelle">Médiation Professionnelle</option>
+              <option value="Séminaire d'équipe dirigeante">Séminaire d'équipe dirigeante</option>
+              <option value="Autre">Autre</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Message *</label>
+            <textarea id="message" name="message" rows="5" placeholder="Décrivez brièvement votre besoin ou votre situation..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary btn--full" id="submit-btn">Envoyer le message</button>
+          <p class="form-success" id="form-success" style="display:none">
+            ✅ Message envoyé ! Je vous réponds sous 48h.
+          </p>
+        </form>
+
       </div>
-      <div class="contact-cards">
-
-        <a href="mailto:contact@steevencadel.fr" class="contact-card">
-          <div class="contact-card__icon">
-            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <rect x="6" y="12" width="36" height="26" rx="3" stroke="currentColor" stroke-width="2"/>
-              <path d="M6 16l18 13L42 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <div class="contact-card__body">
-            <h3>Par email</h3>
-            <p>Décrivez votre situation et je vous réponds sous 48h.</p>
-            <span class="contact-card__action">contact@steevencadel.fr</span>
-          </div>
-          <div class="contact-card__arrow">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-        </a>
-
-        <a href="https://linkedin.com/in/steeven-cadel" target="_blank" rel="noopener" class="contact-card contact-card--linkedin">
-          <div class="contact-card__icon">
-            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <rect x="4" y="4" width="40" height="40" rx="6" stroke="currentColor" stroke-width="2"/>
-              <path d="M16 20v14M16 15v1M24 34v-8a4 4 0 018 0v8M24 20v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <div class="contact-card__body">
-            <h3>Via LinkedIn</h3>
-            <p>Envoyez-moi un message ou suivez mes réflexions sur le leadership et la cohésion d'équipe.</p>
-            <span class="contact-card__action">linkedin.com/in/steeven-cadel</span>
-          </div>
-          <div class="contact-card__arrow">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-        </a>
-
-      </div>
-      <p class="contact__location">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" width="16" height="16">
-          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
-        </svg>
-        Interventions en France — Paris / Nantes (présentiel) &amp; distanciel
-      </p>
     </div>
   </section>
 

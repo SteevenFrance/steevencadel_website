@@ -37,46 +37,30 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 fadeEls.forEach(el => observer.observe(el));
 
-// ---- Contact form — Web3Forms ----
+// ---- Contact form — Netlify Forms ----
 const form = document.getElementById('contact-form');
 if (form) {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const btn = form.querySelector('button[type="submit"]');
+    const btn = document.getElementById('submit-btn');
+    const success = document.getElementById('form-success');
     btn.textContent = 'Envoi en cours…';
     btn.disabled = true;
 
-    const data = new FormData(form);
-    const object = Object.fromEntries(data);
-    const json = JSON.stringify(object);
-
     try {
-      console.log('[Web3Forms] Envoi en cours…', object);
-      const res = await fetch('https://api.web3forms.com/submit', {
+      const data = new FormData(form);
+      await fetch('/', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: json
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(data).toString()
       });
-      const result = await res.json();
-      console.log('[Web3Forms] Réponse :', result);
-
-      if (result.success) {
-        btn.textContent = 'Message envoyé ✓';
-        btn.style.background = '#2D6FA3';
-        btn.style.borderColor = '#2D6FA3';
-        btn.style.color = '#fff';
-        form.reset();
-      } else {
-        btn.textContent = 'Erreur — réessayez';
-        btn.disabled = false;
-        btn.style.background = '#c0392b';
-        console.error('[Web3Forms] Échec :', result.message);
-      }
+      btn.style.display = 'none';
+      success.style.display = 'block';
+      form.reset();
     } catch (err) {
-      btn.textContent = 'Erreur réseau — réessayez';
+      btn.textContent = 'Erreur — réessayez';
       btn.disabled = false;
       btn.style.background = '#c0392b';
-      console.error('[Web3Forms] Erreur réseau :', err);
     }
   });
 }
