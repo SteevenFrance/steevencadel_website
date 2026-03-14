@@ -1145,6 +1145,57 @@ ul { list-style: none; }
 }
 
 /* ============================================================
+   DIAGNOSTIC CTA
+   ============================================================ */
+.diag-cta {
+  padding: 0;
+}
+.diag-cta__inner {
+  background: var(--navy);
+  border-radius: var(--radius-lg);
+  padding: 56px 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+}
+.diag-cta__label {
+  font-family: 'Poppins', sans-serif;
+  font-size: .75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.diag-cta__title {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+.diag-cta__desc {
+  font-size: .95rem;
+  color: rgba(255,255,255,.75);
+  line-height: 1.6;
+  max-width: 520px;
+}
+.diag-cta__btn {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+@media (max-width: 768px) {
+  .diag-cta__inner {
+    flex-direction: column;
+    padding: 40px 28px;
+    text-align: center;
+    gap: 28px;
+  }
+}
+
+/* ============================================================
    STATS STRIP
    ============================================================ */
 .stats-strip {
