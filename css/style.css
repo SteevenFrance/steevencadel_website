@@ -784,6 +784,265 @@ ul { list-style: none; }
 }
 
 /* ============================================================
+   BUTTONS EXTRA
+   ============================================================ */
+.btn--outline-light {
+  background: transparent;
+  color: rgba(255,255,255,.85);
+  border-color: rgba(255,255,255,.4);
+}
+.btn--outline-light:hover {
+  background: rgba(255,255,255,.1);
+  border-color: var(--white);
+  color: var(--white);
+}
+.btn--outline-navy {
+  background: transparent;
+  color: var(--navy);
+  border-color: var(--navy);
+}
+.btn--outline-navy:hover {
+  background: var(--navy);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   APPROCHE — ACTIONS
+   ============================================================ */
+.approche__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+/* ============================================================
+   ENJEUX
+   ============================================================ */
+.enjeux__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.enjeu-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+.enjeu-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+.enjeu-card__icon {
+  width: 52px;
+  height: 52px;
+  background: rgba(45,111,163,.1);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue);
+  flex-shrink: 0;
+}
+.enjeu-card__icon svg { width: 26px; height: 26px; }
+.enjeu-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.35;
+}
+.enjeu-card p {
+  font-size: .875rem;
+  color: var(--text-mid);
+  line-height: 1.65;
+  flex: 1;
+}
+.enjeu-card__link {
+  font-family: 'Poppins', sans-serif;
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--blue);
+  letter-spacing: .01em;
+  transition: color var(--transition);
+  margin-top: auto;
+}
+.enjeu-card__link:hover { color: var(--navy); }
+
+/* ============================================================
+   PHOTO BANNER
+   ============================================================ */
+.photo-banner {
+  position: relative;
+  height: 380px;
+  overflow: hidden;
+}
+.photo-banner--short { height: 260px; }
+.photo-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+}
+.photo-banner__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(27,58,107,.72) 0%, rgba(27,58,107,.45) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+.photo-banner__quote {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--white);
+  text-align: center;
+  max-width: 760px;
+  line-height: 1.55;
+  letter-spacing: .01em;
+}
+
+/* ============================================================
+   ARTICLES LINKEDIN
+   ============================================================ */
+.articles__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-bottom: 48px;
+}
+.article-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+.article-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+.article-card__tag {
+  display: inline-block;
+  background: rgba(45,111,163,.1);
+  color: var(--blue);
+  font-family: 'Poppins', sans-serif;
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 20px;
+  width: fit-content;
+}
+.article-card__title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.35;
+}
+.article-card__desc {
+  font-size: .875rem;
+  color: var(--text-mid);
+  line-height: 1.7;
+  flex: 1;
+}
+.article-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.article-card__read {
+  font-size: .78rem;
+  color: var(--text-light);
+  font-style: italic;
+}
+.article-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Poppins', sans-serif;
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--blue);
+  transition: color var(--transition), gap var(--transition);
+}
+.article-card__link:hover {
+  color: var(--navy);
+  gap: 10px;
+}
+.articles__cta {
+  text-align: center;
+}
+
+/* ============================================================
+   PAGE HEADER (parcours.html)
+   ============================================================ */
+.page-header {
+  background: var(--navy);
+  padding: 140px 0 64px;
+  text-align: center;
+}
+.page-header__title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--white);
+  margin: 12px 0 16px;
+}
+.page-header__sub {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,.65);
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* Nav active state */
+.nav__active {
+  color: var(--gold) !important;
+  font-weight: 600;
+}
+
+/* Parcours CTA */
+.parcours__cta {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 64px;
+  flex-wrap: wrap;
+}
+
+/* ============================================================
+   RESPONSIVE — NOUVEAUX ÉLÉMENTS
+   ============================================================ */
+@media (max-width: 1024px) {
+  .enjeux__grid   { grid-template-columns: repeat(2, 1fr); }
+  .articles__grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .enjeux__grid     { grid-template-columns: 1fr; }
+  .articles__grid   { grid-template-columns: 1fr; }
+  .photo-banner     { height: 260px; }
+  .photo-banner--short { height: 200px; }
+  .approche__actions { flex-direction: column; }
+  .photo-banner__quote { font-size: 1rem; }
+}
+
+/* ============================================================
    ANIMATIONS
    ============================================================ */
 .fade-in {
