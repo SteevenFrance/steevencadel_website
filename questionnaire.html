@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz : Quel est votre niveau d'organisation ? — Steeven Cadel</title>
+  <meta name="description" content="Faites le test en 2 minutes : découvrez votre profil d'organisation et recevez des conseils personnalisés pour reprendre le contrôle de votre quotidien." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="css/style.css?v=4" />
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="nav nav--dark" id="nav">
+    <div class="nav__container">
+      <a href="index.html" class="nav__logo">Steeven <span>Cadel</span></a>
+      <ul class="nav__links" id="nav-links">
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="index.html#approche">Approche</a></li>
+        <li><a href="index.html#articles">Réflexions</a></li>
+        <li><a href="parcours.html">Parcours</a></li>
+        <li><a href="livre.html">Livre</a></li>
+        <li><a href="index.html#contact" class="nav__cta">Prendre contact</a></li>
+      </ul>
+      <button class="nav__burger" id="burger" aria-label="Ouvrir le menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ===== QUIZ HERO ===== -->
+  <header class="quiz-hero">
+    <div class="container">
+      <span class="section-head__label" style="color:var(--gold)">Test gratuit &mdash; 2 minutes</span>
+      <h1 class="quiz-hero__title">Quel est votre niveau d'organisation ?</h1>
+      <p class="quiz-hero__sub">7 questions pour découvrir votre profil et obtenir des conseils personnalisés.</p>
+      <button class="btn btn--primary btn--lg" id="quiz-start">Commencer le test &rarr;</button>
+    </div>
+  </header>
+
+  <!-- ===== QUIZ ===== -->
+  <section class="quiz-section" id="quiz-section" style="display:none;">
+    <div class="container">
+
+      <!-- Progress bar -->
+      <div class="quiz-progress">
+        <div class="quiz-progress__bar" id="quiz-bar"></div>
+      </div>
+      <p class="quiz-progress__label">Question <span id="quiz-current">1</span> / 7</p>
+
+      <!-- Questions -->
+      <div class="quiz-card" id="quiz-card">
+        <!-- Filled by JS -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== RESULTS (hidden) ===== -->
+  <section class="quiz-results" id="quiz-results" style="display:none;">
+    <div class="container">
+      <div class="quiz-results__inner">
+
+        <!-- Score circle -->
+        <div class="quiz-results__score">
+          <div class="quiz-score-ring" id="score-ring">
+            <svg viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="54" stroke-width="8" stroke="rgba(255,255,255,.15)" fill="none" />
+              <circle cx="60" cy="60" r="54" stroke-width="8" stroke="var(--gold)" fill="none"
+                      stroke-dasharray="339.292" stroke-dashoffset="339.292" stroke-linecap="round"
+                      id="score-circle" />
+            </svg>
+            <span class="quiz-score-ring__num" id="score-num">0</span>
+          </div>
+          <p class="quiz-results__out-of">sur 28</p>
+        </div>
+
+        <!-- Profile -->
+        <div class="quiz-results__profile">
+          <span class="quiz-results__badge" id="result-badge"></span>
+          <h2 class="quiz-results__title" id="result-title"></h2>
+          <p class="quiz-results__desc" id="result-desc"></p>
+        </div>
+
+        <!-- Email gate -->
+        <div class="quiz-results__email" id="email-gate">
+          <h3>Recevez vos conseils personnalisés</h3>
+          <p>Entrez votre email pour recevoir votre profil détaillé et des actions concrètes à mettre en place dès aujourd'hui.</p>
+          <form class="quiz-email-form" id="quiz-email-form" data-netlify="true" name="quiz" method="POST">
+            <input type="hidden" name="form-name" value="quiz" />
+            <input type="hidden" name="profil" id="input-profil" />
+            <input type="hidden" name="score" id="input-score" />
+            <input type="email" name="email" placeholder="votre@email.com" required />
+            <button type="submit" class="btn btn--primary">Recevoir mes conseils</button>
+          </form>
+        </div>
+
+        <!-- CTA livre -->
+        <div class="quiz-results__cta">
+          <p>La Méthode Restart est faite pour vous aider à passer au niveau supérieur.</p>
+          <a href="https://amzn.eu/d/0ayQhczf" target="_blank" rel="noopener" class="btn btn--primary btn--lg">
+            Découvrir le livre Restart Mensuel &rarr;
+          </a>
+          <a href="livre.html" class="quiz-results__link">En savoir plus sur le livre</a>
+        </div>
+
+        <!-- Retake -->
+        <button class="btn btn--outline-navy" id="quiz-retake">Refaire le test</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="index.html" class="nav__logo">Steeven <span>Cadel</span></a>
+          <p>Coach d'équipe & Médiateur Professionnel</p>
+        </div>
+        <div class="footer__links">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#approche">Approche</a></li>
+            <li><a href="index.html#articles">Réflexions</a></li>
+            <li><a href="parcours.html">Parcours</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer__links">
+          <h4>Ressources</h4>
+          <ul>
+            <li><a href="livre.html">Restart Mensuel</a></li>
+            <li><a href="questionnaire.html">Quiz organisation</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2026 Steeven Cadel. Tous droits réservés.</p>
+        <a href="https://linkedin.com/in/steeven-cadel" target="_blank" rel="noopener" class="footer__linkedin" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
+            <circle cx="4" cy="4" r="2"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js?v=3"></script>
+  <script src="js/quiz.js?v=1"></script>
+</body>
+</html>
