@@ -169,10 +169,6 @@ function showResults() {
   const total = scores.reduce((a, b) => a + b, 0);
   const profile = profiles.find(p => total >= p.min && total <= p.max) || profiles[0];
 
-  // Fill hidden inputs
-  document.getElementById('input-profil').value = profile.badge;
-  document.getElementById('input-score').value = total;
-
   // Animate score
   const scoreNum = document.getElementById('score-num');
   const scoreCircle = document.getElementById('score-circle');
@@ -198,41 +194,6 @@ function showResults() {
 
   document.getElementById('result-title').textContent = profile.title;
   document.getElementById('result-desc').textContent = profile.desc;
-}
-
-// ---- Email form — sends via Brevo (Netlify Function) ----
-const emailForm = document.getElementById('quiz-email-form');
-if (emailForm) {
-  emailForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const btn = emailForm.querySelector('button');
-    btn.textContent = 'Envoi en cours…';
-    btn.disabled = true;
-
-    const email = emailForm.querySelector('input[type="email"]').value;
-    const profil = document.getElementById('input-profil').value;
-    const score = document.getElementById('input-score').value;
-
-    try {
-      const res = await fetch('/.netlify/functions/send-quiz-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, profil, score: parseInt(score) })
-      });
-
-      if (!res.ok) throw new Error('Send failed');
-
-      document.getElementById('email-gate').innerHTML = `
-        <div class="quiz-email-success">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          <p><strong>C'est envoyé !</strong> Vérifiez votre boîte mail pour recevoir vos conseils personnalisés.</p>
-        </div>
-      `;
-    } catch (err) {
-      btn.textContent = 'Erreur — réessayez';
-      btn.disabled = false;
-    }
-  });
 }
 
 // ---- Retake ----
