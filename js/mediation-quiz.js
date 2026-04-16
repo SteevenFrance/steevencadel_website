@@ -160,7 +160,7 @@ function selectAnswer(btn) {
 function showResults() {
   sectionEl.style.display = 'none';
   resultsEl.style.display = 'block';
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo({ top: resultsEl.offsetTop - 80, behavior: 'smooth' });
 
   const total = scores.reduce((a, b) => a + b, 0);
   const profile = profiles.find(p => total >= p.min && total <= p.max) || profiles[0];
@@ -197,6 +197,6 @@ if (retakeBtn) {
     scores = [];
     resultsEl.style.display = 'none';
     heroEl.style.display = '';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: heroEl.offsetTop - 80, behavior: 'smooth' });
   });
 }
