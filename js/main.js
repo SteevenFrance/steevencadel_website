@@ -37,6 +37,17 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 fadeEls.forEach(el => observer.observe(el));
 
+// ---- Pré-remplissage du sujet du formulaire contact via ?sujet=... ----
+const sujetSelect = document.getElementById('sujet');
+if (sujetSelect) {
+  const params = new URLSearchParams(window.location.search);
+  const sujetParam = params.get('sujet');
+  if (sujetParam) {
+    const match = [...sujetSelect.options].find(o => o.value === sujetParam);
+    if (match) sujetSelect.value = sujetParam;
+  }
+}
+
 // ---- Contact form — Netlify Forms ----
 const form = document.getElementById('contact-form');
 if (form) {

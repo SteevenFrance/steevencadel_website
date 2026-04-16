@@ -1797,3 +1797,167 @@ ul { list-style: none; }
   .quiz-email-form { flex-direction: column; }
   .quiz-results__email { padding: 28px 20px; }
 }
+
+/* ============================================================
+   MEDIATION PAGE
+   ============================================================ */
+
+/* -- Page header actions -- */
+.page-header__actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+
+/* -- Piliers de la médiation -- */
+.mediation-pillars {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.mediation-pillar {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px 24px;
+  text-align: center;
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+.mediation-pillar:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+  border-color: var(--gold);
+}
+.mediation-pillar__icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: rgba(201,168,76,.12);
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+}
+.mediation-pillar__icon svg { width: 28px; height: 28px; }
+.mediation-pillar h3 {
+  font-size: 1.05rem;
+  color: var(--navy);
+  margin-bottom: 10px;
+}
+.mediation-pillar p {
+  font-size: .92rem;
+  color: var(--text-mid);
+  line-height: 1.6;
+}
+
+/* -- Signaux d'alerte -- */
+.signals-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+.signal-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  border-left: 4px solid var(--gold);
+  box-shadow: var(--shadow);
+  position: relative;
+}
+.signal-card__num {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--gold);
+  opacity: .35;
+  display: block;
+  margin-bottom: 8px;
+}
+.signal-card h3 {
+  color: var(--navy);
+  font-size: 1.15rem;
+  margin-bottom: 10px;
+}
+.signal-card p {
+  color: var(--text-mid);
+  font-size: .95rem;
+  line-height: 1.65;
+}
+
+/* -- Étapes du processus -- */
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  position: relative;
+}
+.process-step {
+  background: var(--light);
+  border-radius: var(--radius-lg);
+  padding: 32px 24px;
+  text-align: center;
+}
+.process-step__num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: var(--gold);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+}
+.process-step h3 {
+  font-size: 1.05rem;
+  color: var(--navy);
+  margin-bottom: 10px;
+}
+.process-step p {
+  font-size: .92rem;
+  color: var(--text-mid);
+  line-height: 1.6;
+}
+
+/* -- Résultat quiz médiation : reco + disclaimer -- */
+.quiz-results__reco {
+  background: var(--light);
+  border-left: 3px solid var(--gold);
+  padding: 18px 22px;
+  border-radius: 8px;
+  margin: 0 auto 32px;
+  max-width: 560px;
+  font-size: .98rem;
+  color: var(--text-mid);
+  line-height: 1.65;
+  text-align: left;
+}
+.quiz-results__disclaimer {
+  margin-top: 28px;
+  font-size: .82rem;
+  color: var(--text-light);
+  font-style: italic;
+  max-width: 540px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.55;
+}
+
+/* -- Responsive mediation -- */
+@media (max-width: 960px) {
+  .mediation-pillars { grid-template-columns: repeat(2, 1fr); }
+  .process-steps     { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .mediation-pillars { grid-template-columns: 1fr; }
+  .signals-grid      { grid-template-columns: 1fr; }
+  .process-steps     { grid-template-columns: 1fr; }
+  .page-header__actions { flex-direction: column; align-items: stretch; }
+  .page-header__actions .btn { justify-content: center; }
+}
