@@ -1961,3 +1961,158 @@ ul { list-style: none; }
   .page-header__actions { flex-direction: column; align-items: stretch; }
   .page-header__actions .btn { justify-content: center; }
 }
+
+/* ============================================================
+   INSIGHTS DISCOVERY PAGE
+   ============================================================ */
+
+/* -- Grille des 4 énergies -- */
+.energies-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+.energy-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border-top: 6px solid transparent;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.energy-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+.energy-card__header {
+  padding: 28px 28px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.energy-card__dot {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+.energy-card__header h3 {
+  font-size: 1.35rem;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+.energy-card__tag {
+  font-family: 'Poppins', sans-serif;
+  font-size: .78rem;
+  font-weight: 500;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--text-mid);
+}
+.energy-card__body {
+  padding: 22px 28px 28px;
+}
+.energy-card__body h4 {
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 10px;
+  margin-top: 16px;
+  letter-spacing: .02em;
+}
+.energy-card__body h4:first-child { margin-top: 0; }
+.energy-card__body ul {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.energy-card__body li {
+  position: relative;
+  padding-left: 18px;
+  font-size: .92rem;
+  color: var(--text-mid);
+  line-height: 1.55;
+}
+.energy-card__body li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: .35;
+}
+
+/* Variantes couleur */
+.energy-card--red   { border-top-color: #d94b4b; }
+.energy-card--red   .energy-card__dot { background: #d94b4b; }
+.energy-card--red   .energy-card__header h3 { color: #b32e2e; }
+
+.energy-card--yellow{ border-top-color: #f4c430; }
+.energy-card--yellow .energy-card__dot { background: #f4c430; }
+.energy-card--yellow .energy-card__header h3 { color: #b8901b; }
+
+.energy-card--green { border-top-color: #4ea37a; }
+.energy-card--green .energy-card__dot { background: #4ea37a; }
+.energy-card--green .energy-card__header h3 { color: #2f7a55; }
+
+.energy-card--blue  { border-top-color: #3a7ca5; }
+.energy-card--blue  .energy-card__dot { background: #3a7ca5; }
+.energy-card--blue  .energy-card__header h3 { color: var(--navy); }
+
+.energies-note {
+  max-width: 780px;
+  margin: 48px auto 0;
+  text-align: center;
+  font-size: .95rem;
+  color: var(--text-mid);
+  line-height: 1.65;
+  font-style: italic;
+}
+
+/* -- 3 niveaux de lecture -- */
+.reveals-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.reveal-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+  transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+}
+.reveal-card:hover {
+  border-color: var(--gold);
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+}
+.reveal-card__num {
+  display: inline-block;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--gold);
+  letter-spacing: .05em;
+  margin-bottom: 14px;
+}
+.reveal-card h3 {
+  color: var(--navy);
+  font-size: 1.15rem;
+  margin-bottom: 10px;
+}
+.reveal-card p {
+  color: var(--text-mid);
+  font-size: .95rem;
+  line-height: 1.65;
+}
+
+/* -- Responsive Insights -- */
+@media (max-width: 768px) {
+  .energies-grid { grid-template-columns: 1fr; }
+  .reveals-grid  { grid-template-columns: 1fr; }
+}
