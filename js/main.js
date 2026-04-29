@@ -23,7 +23,7 @@ navLinks.querySelectorAll('a').forEach(a => {
 
 // ---- Fade-in on scroll ----
 const fadeEls = document.querySelectorAll(
-  '.svc-card, .methode, .client-card, .timeline-item, .parcours__list li, .section-head, .approche__left, .approche__right, .contact__left, .contact__form'
+  '.svc-card, .methode, .client-card, .timeline-item, .parcours__list li, .section-head, .approche__left, .approche__right, .contact__left, .contact__form, .book-banner__inner'
 );
 fadeEls.forEach(el => el.classList.add('fade-in'));
 

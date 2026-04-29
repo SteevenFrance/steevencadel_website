@@ -2116,3 +2116,104 @@ ul { list-style: none; }
   .energies-grid { grid-template-columns: 1fr; }
   .reveals-grid  { grid-template-columns: 1fr; }
 }
+
+/* ============================================================
+   BOOK BANNER (homepage cross-sell)
+   ============================================================ */
+.book-banner {
+  padding: 0;
+  margin: 0 0 0;
+}
+.book-banner__inner {
+  background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+  border-radius: var(--radius-lg);
+  padding: 56px 64px;
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  color: var(--white);
+}
+.book-banner__cover {
+  flex-shrink: 0;
+  width: 160px;
+}
+.book-banner__cover img {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 12px 40px rgba(0,0,0,.35);
+  transition: transform .3s ease;
+}
+.book-banner__cover img:hover {
+  transform: scale(1.04) rotate(-1deg);
+}
+.book-banner__title {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--white);
+  margin: 8px 0 14px;
+}
+.book-banner__desc {
+  color: rgba(255,255,255,.75);
+  line-height: 1.65;
+  margin-bottom: 24px;
+  max-width: 480px;
+}
+.book-banner__actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+@media (max-width: 768px) {
+  .book-banner__inner {
+    flex-direction: column;
+    text-align: center;
+    padding: 40px 28px;
+    gap: 28px;
+  }
+  .book-banner__cover { width: 120px; }
+  .book-banner__desc { margin-left: auto; margin-right: auto; }
+  .book-banner__actions { justify-content: center; }
+}
+
+/* ============================================================
+   404 ERROR PAGE
+   ============================================================ */
+.error-page {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 160px 0 80px;
+}
+.error-page__code {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(6rem, 15vw, 12rem);
+  font-weight: 700;
+  color: var(--border);
+  line-height: 1;
+  display: block;
+  margin-bottom: 16px;
+}
+.error-page__title {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 16px;
+}
+.error-page__desc {
+  font-size: 1.05rem;
+  color: var(--text-mid);
+  margin-bottom: 36px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.error-page__actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
