@@ -2505,3 +2505,84 @@ ul { list-style: none; }
   .faq-item__q { padding: 18px 20px; font-size: .94rem; gap: 16px; }
   .faq-item__a { padding: 4px 20px 20px; }
 }
+
+/* ============================================================
+   CAS ANONYMISÉS (case study)
+   ============================================================ */
+.cases__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+}
+.case-study {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow var(--transition), transform var(--transition), border-color var(--transition);
+}
+.case-study:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px);
+  border-color: var(--gold);
+}
+.case-study__header {
+  padding: 28px 32px 20px;
+  background: linear-gradient(180deg, rgba(201,168,76,.08) 0%, rgba(201,168,76,0) 100%);
+  border-bottom: 1px solid var(--border);
+}
+.case-study__tag {
+  display: inline-block;
+  background: rgba(27,58,107,.08);
+  color: var(--navy);
+  font-family: 'Poppins', sans-serif;
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+}
+.case-study__title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.35;
+}
+.case-study__body {
+  padding: 24px 32px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+}
+.case-study__block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-left: 18px;
+  border-left: 3px solid var(--border);
+  transition: border-color var(--transition);
+}
+.case-study:hover .case-study__block { border-left-color: var(--gold); }
+.case-study__label {
+  font-family: 'Poppins', sans-serif;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+}
+.case-study__block p {
+  font-size: .92rem;
+  color: var(--text-mid);
+  line-height: 1.7;
+}
+@media (max-width: 768px) {
+  .cases__grid { grid-template-columns: 1fr; }
+  .case-study__header { padding: 24px 24px 16px; }
+  .case-study__body { padding: 20px 24px 28px; }
+}
