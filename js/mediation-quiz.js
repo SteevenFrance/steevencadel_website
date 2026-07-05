@@ -76,7 +76,7 @@ const profiles = [
     color: "#c0392b",
     title: "La médiation professionnelle est clairement indiquée",
     desc: "Le dialogue est très abîmé : confiance rompue, non-dits majeurs, impact sur votre santé ou votre équipe. Les tentatives internes n'ont pas suffi. Attendre davantage risque d'aggraver la situation (RPS, arrêts, départs, contentieux).",
-    reco: "Un médiateur professionnel vous apportera un cadre neutre et confidentiel pour sortir de la spirale. Un premier échange de 30 minutes permet de poser la situation sans engagement."
+    reco: "Un médiateur professionnel vous apportera un cadre neutre et confidentiel pour sortir de la spirale. Un premier échange de 20 minutes permet de poser la situation sans engagement."
   },
   {
     min: 15, max: 21,
