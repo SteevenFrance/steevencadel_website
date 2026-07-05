@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
-  <link rel="stylesheet" href="css/style.css?v=9" />
+  <link rel="stylesheet" href="css/style.css?v=10" />
   <!-- Privacy-friendly analytics by Plausible -->
   <script async src="https://plausible.io/js/pa-CtxiWmkunxR96ov_k4NzT.js"></script>
   <script>
@@ -136,7 +136,7 @@
           pour <strong>transformer le coût caché des tensions en performance collective durable</strong>.
         </p>
         <div class="hero__actions">
-          <a href="#contact" class="btn btn--primary btn--lg">Réserver un échange · 30 min offert</a>
+          <a href="https://calendly.com/scadel/20minutes" target="_blank" rel="noopener" class="btn btn--primary btn--lg">Réserver un échange · 20 min offert</a>
           <a href="#enjeux" class="btn btn--outline">Vos enjeux →</a>
         </div>
         <p class="hero__trust">Sans engagement · Confidentiel · Réponse sous 24 h</p>
@@ -251,7 +251,7 @@
       <blockquote class="photo-banner__quote">
         "La qualité des relations est le levier le plus puissant de la performance collective."
       </blockquote>
-      <a href="#contact" class="btn btn--primary" style="margin-top:28px;">Parlons de votre équipe</a>
+      <a href="https://calendly.com/scadel/20minutes" target="_blank" rel="noopener" class="btn btn--primary" style="margin-top:28px;">Parlons de votre équipe</a>
     </div>
   </div>
 
@@ -505,7 +505,7 @@
             technique et humain — qui fait la singularité de mon accompagnement.
           </p>
           <div class="approche__actions">
-            <a href="#contact" class="btn btn--gold">Parlons de votre équipe</a>
+            <a href="https://calendly.com/scadel/20minutes" target="_blank" rel="noopener" class="btn btn--gold">Parlons de votre équipe</a>
             <a href="parcours.html" class="btn btn--outline-light">Voir mon parcours</a>
           </div>
         </div>
@@ -561,7 +561,7 @@
           <span class="howto-step__num">01</span>
           <h3 class="howto-step__title">Échange de cadrage</h3>
           <p class="howto-step__desc">Vous me décrivez la situation, l'équipe, les enjeux. Je pose les bonnes questions et je vous dis honnêtement si une intervention est pertinente — ou pas.</p>
-          <p class="howto-step__meta">30 min · visio ou téléphone · offert · confidentiel</p>
+          <p class="howto-step__meta">20 min · visio ou téléphone · offert · confidentiel</p>
         </article>
 
         <article class="howto-step">
@@ -580,8 +580,8 @@
 
       </div>
       <div class="howto__cta">
-        <a href="#contact" class="btn btn--primary btn--lg">Réserver l'échange de cadrage</a>
-        <p class="howto__cta-sub">Aucune obligation à l'issue. Si je ne suis pas la bonne personne, je vous le dirai — et je vous orienterai si nécessaire.</p>
+        <a href="https://calendly.com/scadel/20minutes" target="_blank" rel="noopener" class="btn btn--primary btn--lg">Réserver l'échange de cadrage</a>
+        <p class="howto__cta-sub">Choisissez directement votre créneau en ligne. Aucune obligation à l'issue. Si je ne suis pas la bonne personne, je vous le dirai — et je vous orienterai si nécessaire.</p>
       </div>
     </div>
   </section>
@@ -657,8 +657,8 @@
   <section class="clients section section--light">
     <div class="container">
       <div class="section-head">
-        <p class="section-label">À qui je m'adresse</p>
-        <h2 class="section-title">Ils me font confiance</h2>
+        <p class="section-label">Mes interlocuteurs</p>
+        <h2 class="section-title">À qui je m'adresse</h2>
       </div>
       <div class="clients__grid">
         <div class="client-card">
@@ -797,6 +797,13 @@
           <h2 class="section-title">Prendre contact</h2>
           <p class="contact__desc">Chaque situation est unique. Échangeons sur vos enjeux pour définir ensemble l'accompagnement le plus adapté à votre équipe.</p>
 
+          <div class="booking-card">
+            <p class="booking-card__label">Le plus simple</p>
+            <h3>Réservez directement votre échange de cadrage</h3>
+            <p>20 minutes en visio ou par téléphone — offert, confidentiel, sans engagement. Choisissez le créneau qui vous convient :</p>
+            <a href="https://calendly.com/scadel/20minutes" target="_blank" rel="noopener" class="btn btn--primary">Choisir un créneau →</a>
+          </div>
+
           <div class="contact__info">
             <div class="contact__info-item">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -834,9 +841,15 @@
               <input type="email" id="email" name="email" placeholder="votre@email.com" required />
             </div>
           </div>
-          <div class="form-group">
-            <label for="entreprise">Entreprise / Organisation</label>
-            <input type="text" id="entreprise" name="entreprise" placeholder="Nom de votre organisation" />
+          <div class="form-row">
+            <div class="form-group">
+              <label for="entreprise">Entreprise / Organisation</label>
+              <input type="text" id="entreprise" name="entreprise" placeholder="Nom de votre organisation" />
+            </div>
+            <div class="form-group">
+              <label for="telephone">Téléphone <span style="font-weight:400; color:var(--text-light)">(optionnel)</span></label>
+              <input type="tel" id="telephone" name="telephone" placeholder="06 00 00 00 00" autocomplete="tel" />
+            </div>
           </div>
           <div class="form-group">
             <label for="sujet">Sujet *</label>
@@ -855,33 +868,10 @@
           </div>
           <button type="submit" class="btn btn--primary btn--full" id="submit-btn">Envoyer le message</button>
           <p class="form-success" id="form-success" style="display:none">
-            ✅ Message envoyé ! Je vous réponds sous 48h.
+            ✅ Message envoyé ! Je vous réponds sous 24 h.
           </p>
         </form>
 
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== BANNIÈRE LIVRE (cross-sell soft) ===== -->
-  <section class="book-banner">
-    <div class="container">
-      <div class="book-banner__inner">
-        <div class="book-banner__cover">
-          <picture>
-            <source type="image/webp" srcset="assets/images/restart-mensuel-cover-320.webp" />
-            <img src="assets/images/restart-mensuel-cover-320.jpg" alt="Restart Mensuel par Steeven Cadel" width="320" height="512" loading="lazy" />
-          </picture>
-        </div>
-        <div class="book-banner__text">
-          <span class="section-label">Mon livre</span>
-          <h2 class="book-banner__title">Restart Mensuel</h2>
-          <p class="book-banner__desc">Au-delà du collectif, je travaille aussi sur le pilotage personnel. Mon ouvrage en 15 chapitres : comment j'ai repris le contrôle de ma vie en recommençant chaque mois à zéro.</p>
-          <div class="book-banner__actions">
-            <a href="livre.html" class="btn btn--primary">Découvrir le livre &rarr;</a>
-            <a href="questionnaire.html" class="btn btn--outline-navy">Faire le quiz gratuit</a>
-          </div>
-        </div>
       </div>
     </div>
   </section>
@@ -919,7 +909,7 @@
         </div>
       </div>
       <div class="footer__bottom">
-        <p>&copy; 2026 Steeven Cadel. Tous droits réservés.</p>
+        <p>&copy; 2026 Steeven Cadel. Tous droits réservés. · <a href="/mentions-legales.html">Mentions légales &amp; confidentialité</a></p>
         <a href="https://linkedin.com/in/steeven-cadel" target="_blank" rel="noopener" class="footer__linkedin" aria-label="LinkedIn">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
@@ -930,6 +920,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=4"></script>
+  <script src="js/main.js?v=5"></script>
 </body>
 </html>

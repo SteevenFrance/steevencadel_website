@@ -54,7 +54,6 @@ if (form) {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = document.getElementById('submit-btn');
-    const success = document.getElementById('form-success');
     btn.textContent = 'Envoi en cours…';
     btn.disabled = true;
 
@@ -65,9 +64,8 @@ if (form) {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams(data).toString()
       });
-      btn.style.display = 'none';
-      success.style.display = 'block';
-      form.reset();
+      if (window.plausible) plausible('Formulaire Contact');
+      window.location.href = '/merci.html';
     } catch (err) {
       btn.textContent = 'Erreur — réessayez';
       btn.disabled = false;
@@ -75,3 +73,10 @@ if (form) {
     }
   });
 }
+
+// ---- Tracking Plausible : clics vers Calendly ----
+document.querySelectorAll('a[href*="calendly.com"]').forEach(a => {
+  a.addEventListener('click', () => {
+    if (window.plausible) plausible('Clic Calendly', { props: { page: window.location.pathname } });
+  });
+});
