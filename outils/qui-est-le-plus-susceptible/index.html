@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Qui est le plus susceptible de…</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0f1b2d; --bg2:#16263d; --card:#1d3150; --line:#2c4569;
+  --ink:#f4f1ea; --muted:#9fb0c8; --accent:#ffc83d; --accent-ink:#1b1400;
+  --pop:#ff6b57; --ok:#4fd1a5;
+  --font:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:radial-gradient(1200px 700px at 85% -10%,#24406a 0%,transparent 60%),var(--bg);color:var(--ink);font-family:var(--font);-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+input{font:inherit}
+.hidden{display:none!important}
+
+/* ---------- Participant (phone) ---------- */
+.phone{max-width:520px;margin:0 auto;min-height:100%;padding:20px 16px calc(28px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:18px}
+.brand{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.brand b{color:var(--accent)}
+.h1{font-size:30px;line-height:1.05;font-weight:800;margin:0}
+.q{font-size:24px;line-height:1.15;font-weight:800;margin:0}
+.q .lead{display:block;font-size:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.sub{color:var(--muted);font-size:16px;line-height:1.4;margin:0}
+.field{display:flex;gap:8px}
+.field input{flex:1;min-width:0;padding:16px;border-radius:14px;border:2px solid var(--line);background:var(--bg2);color:var(--ink);font-size:18px}
+.field input:focus{outline:none;border-color:var(--accent)}
+.btn{padding:16px 20px;border-radius:14px;background:var(--accent);color:var(--accent-ink);font-weight:800;font-size:17px}
+.btn:disabled{opacity:.5}
+.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--line)}
+.names{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.name{padding:16px 12px;border-radius:14px;background:var(--card);border:2px solid transparent;font-weight:600;font-size:17px;text-align:center;line-height:1.15;word-break:break-word;transition:transform .08s,background .15s,border-color .15s}
+.name:active{transform:scale(.97)}
+.name.sel{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.name small{display:block;font-weight:400;font-size:12px;opacity:.7;margin-top:2px}
+.status{padding:14px 16px;border-radius:14px;background:var(--bg2);border:1px solid var(--line);font-size:15px;color:var(--muted)}
+.status.ok{color:var(--ok);border-color:rgba(79,209,165,.4)}
+.status.err{color:var(--pop);border-color:rgba(255,107,87,.4)}
+.wait{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:14px;padding:30px 0}
+.pulse{width:64px;height:64px;border-radius:50%;background:var(--accent);animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(.8);opacity:.6}50%{transform:scale(1);opacity:1}}
+.me{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.me .who{font-size:14px;color:var(--muted)}
+.me .who b{color:var(--ink)}
+.link{color:var(--muted);text-decoration:underline;font-size:13px;padding:6px}
+.winner-card{background:var(--card);border-radius:20px;padding:22px;text-align:center;border:2px solid var(--accent)}
+.winner-card .tag{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.winner-card .w{font-size:34px;font-weight:800;line-height:1.1;margin:8px 0 4px}
+.palm{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.palm li{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.palm .pq{font-size:14px;color:var(--muted);line-height:1.3}
+.palm .pw{font-weight:800;font-size:18px;color:var(--accent);margin-top:4px}
+
+/* ---------- Presenter (big screen) ---------- */
+.stage{min-height:100vh;display:grid;grid-template-rows:auto 1fr auto;padding:3vh 4vw 0}
+.top{display:flex;justify-content:space-between;align-items:center;gap:20px}
+.top .brand{font-size:clamp(12px,1.2vw,18px)}
+.counter{font-size:clamp(14px,1.4vw,22px);color:var(--muted);font-weight:600}
+.counter b{color:var(--ink)}
+.main{display:flex;align-items:center;justify-content:center;padding:3vh 0}
+.lobby{display:grid;grid-template-columns:1.1fr .9fr;gap:5vw;align-items:center;width:100%}
+.big-title{font-size:clamp(40px,6.2vw,110px);line-height:.95;font-weight:800;margin:0;letter-spacing:-.02em}
+.big-title em{font-style:normal;color:var(--accent)}
+.join-hint{font-size:clamp(16px,1.6vw,26px);color:var(--muted);margin-top:3vh;line-height:1.35}
+.join-hint b{color:var(--ink)}
+.qrbox{background:#fff;border-radius:24px;padding:18px;width:min(36vw,58vh);aspect-ratio:1;justify-self:center;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.qrbox svg{width:100%;height:100%;display:block}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:3vh}
+.chip{background:var(--card);border-radius:999px;padding:8px 16px;font-size:clamp(14px,1.3vw,22px);font-weight:600;animation:popin .35s ease-out}
+.chip button{margin-left:8px;color:var(--muted);font-size:.9em}
+.chip button:hover{color:var(--pop)}
+@keyframes popin{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
+.qview{width:100%;max-width:1500px;text-align:center}
+.qnum{font-size:clamp(14px,1.5vw,24px);letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.qtext{font-size:clamp(34px,5vw,86px);line-height:1.05;font-weight:800;margin:2vh auto 0;letter-spacing:-.015em;max-width:24ch}
+.votebar{margin:6vh auto 0;max-width:900px}
+.votebar .lbl{font-size:clamp(16px,1.8vw,30px);color:var(--muted);margin-bottom:14px}
+.votebar .lbl b{color:var(--ink);font-size:1.3em}
+.dots{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.dot{width:clamp(16px,1.6vw,26px);height:clamp(16px,1.6vw,26px);border-radius:50%;background:var(--line);transition:background .3s,transform .3s}
+.dot.on{background:var(--accent);transform:scale(1.1)}
+.minijoin{display:flex;align-items:center;gap:14px;justify-content:center;margin-top:5vh;color:var(--muted);font-size:clamp(13px,1.1vw,18px)}
+.minijoin .mq{background:#fff;border-radius:10px;padding:6px;width:clamp(70px,7vw,120px);aspect-ratio:1}
+.minijoin .mq svg{width:100%;height:100%;display:block}
+.reveal{display:grid;grid-template-columns:1fr 1.2fr;gap:4vw;align-items:center;width:100%;max-width:1600px}
+.reveal .qtext{font-size:clamp(24px,3vw,52px);margin:1.5vh 0 0;text-align:left;max-width:none}
+.reveal .qnum{text-align:left}
+.crown{margin-top:4vh;text-align:left}
+.crown .tag{font-size:clamp(14px,1.4vw,22px);color:var(--accent);font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.crown .w{font-size:clamp(44px,6vw,110px);font-weight:800;line-height:1;margin-top:1vh;animation:winner .7s cubic-bezier(.2,1.6,.4,1) both;animation-delay:.9s}
+.crown .n{font-size:clamp(16px,1.6vw,26px);color:var(--muted);margin-top:1vh;animation:popin .4s both;animation-delay:1.2s}
+@keyframes winner{from{transform:scale(.3) rotate(-6deg);opacity:0}to{transform:none;opacity:1}}
+.bars{display:flex;flex-direction:column;gap:1.4vh}
+.bar{display:grid;grid-template-columns:minmax(120px,30%) 1fr auto;gap:16px;align-items:center;font-size:clamp(16px,1.7vw,28px);font-weight:600}
+.bar .nm{text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .track{height:clamp(22px,3vh,40px);background:var(--bg2);border-radius:10px;overflow:hidden}
+.bar .fill{height:100%;width:0;background:var(--muted);border-radius:10px;transition:width .9s cubic-bezier(.2,.8,.2,1)}
+.bar.top1 .fill{background:var(--accent)}
+.bar.top1 .nm{color:var(--accent)}
+.bar .ct{min-width:2ch;text-align:left;color:var(--muted)}
+.empty{color:var(--muted);font-size:clamp(18px,2vw,32px)}
+.final{width:100%;max-width:1500px}
+.final h2{font-size:clamp(36px,4.6vw,80px);margin:0 0 4vh;font-weight:800;letter-spacing:-.02em}
+.final h2 em{font-style:normal;color:var(--accent)}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,420px),1fr));gap:14px}
+.fitem{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:16px 20px;animation:popin .4s both}
+.fitem .pq{color:var(--muted);font-size:clamp(13px,1.05vw,18px);line-height:1.3}
+.fitem .pw{color:var(--accent);font-weight:800;font-size:clamp(18px,1.6vw,28px);margin-top:6px}
+.dock{position:sticky;bottom:0;display:flex;justify-content:center;gap:10px;padding:14px 0 18px;opacity:.25;transition:opacity .2s;flex-wrap:wrap}
+.dock:hover,.dock:focus-within{opacity:1}
+.dock .btn{padding:12px 18px;font-size:16px}
+.err-banner{position:fixed;top:12px;left:50%;transform:translateX(-50%);background:var(--pop);color:#fff;padding:10px 16px;border-radius:10px;font-weight:600;z-index:20}
+/* Settings drawer */
+.drawer{position:fixed;inset:0;background:rgba(5,10,20,.6);display:flex;justify-content:flex-end;z-index:10}
+.panel{width:min(560px,100%);height:100%;overflow:auto;background:var(--bg2);padding:24px;display:flex;flex-direction:column;gap:18px;border-left:1px solid var(--line)}
+.panel h3{margin:0;font-size:20px}
+.panel textarea{width:100%;min-height:300px;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:12px;font:inherit;font-size:14px;line-height:1.45}
+.panel .row{display:flex;gap:8px;flex-wrap:wrap}
+.panel .btn{padding:10px 14px;font-size:14px}
+.panel .note{color:var(--muted);font-size:13px;line-height:1.4;margin:0}
+.panel code{background:var(--bg);padding:2px 6px;border-radius:6px;font-size:13px;word-break:break-all}
+@media (max-width:900px){
+  .lobby,.reveal{grid-template-columns:1fr}
+  .qrbox{width:min(80vw,60vh)}
+  .bar .nm{text-align:left}
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="err" class="err-banner hidden"></div>
+
+<script src="qrcode.js"></script>
+<script>
+(() => {
+  const SB = "https://qfjflmqgxlltbqjcdxjg.supabase.co";
+  const KEY = "sb_publishable_SY4G9jnXN2KERML8p3vcaw_QaemDDyv";
+  const params = new URLSearchParams(location.search);
+  const ROOM = (params.get("r") || "CODIR").toUpperCase();
+  const ADMIN = params.get("admin");
+  const app = document.getElementById("app");
+  const errEl = document.getElementById("err");
+  const joinUrl = location.origin + location.pathname + (ROOM !== "CODIR" ? "?r=" + encodeURIComponent(ROOM) : "");
+
+  let S = null;          // latest state
+  let lastSig = "";      // to avoid useless re-renders
+  let busy = false;
+
+  async function rpc(fn, args) {
+    const res = await fetch(`${SB}/rest/v1/rpc/${fn}`, {
+      method: "POST",
+      headers: { "apikey": KEY, "Content-Type": "application/json" },
+      body: JSON.stringify(args)
+    });
+    if (!res.ok) {
+      let msg = "Erreur réseau";
+      try { const j = await res.json(); msg = j.message || msg; } catch (e) {}
+      throw new Error(msg);
+    }
+    const t = await res.text();
+    return t ? JSON.parse(t) : null;
+  }
+
+  let errTimer;
+  function showErr(msg) {
+    errEl.textContent = msg; errEl.classList.remove("hidden");
+    clearTimeout(errTimer); errTimer = setTimeout(() => errEl.classList.add("hidden"), 4000);
+  }
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const store = {
+    get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } },
+    set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} },
+    del(k) { try { localStorage.removeItem(k); } catch (e) {} }
+  };
+  function qr(text) {
+    const q = qrcode(0, "M"); q.addData(text); q.make();
+    return q.createSvgTag({ cellSize: 4, margin: 0 });
+  }
+  const nameOf = id => (S.participants.find(p => p.id === id) || {}).name || "?";
+  function winners(results) {
+    if (!results || !results.length) return { names: [], n: 0 };
+    const n = results[0].n;
+    return { names: results.filter(r => r.n === n).map(r => nameOf(r.id)), n };
+  }
+  const joinNames = arr => arr.length <= 1 ? (arr[0] || "") : arr.slice(0, -1).join(", ") + " et " + arr[arr.length - 1];
+  const plural = (n, w) => n + " " + w + (n > 1 ? "s" : "");
+
+  async function poll() {
+    try {
+      const st = await rpc("get_state", { p_room: ROOM });
+      if (!st) { app.innerHTML = `<div class="phone"><p class="h1">Salle « ${esc(ROOM)} » introuvable</p></div>`; return; }
+      S = st;
+      const sig = ADMIN ? JSON.stringify(st) : JSON.stringify({ ...st, voted: 0, updated: 0 });
+      if (sig !== lastSig) { lastSig = sig; ADMIN ? renderStage() : renderPhone(); }
+    } catch (e) { /* transient: keep last screen */ }
+  }
+
+  /* =================== PHONE =================== */
+  const meKey = () => `vc:${ROOM}:${S.round}`;
+  let myVoteCache = {}; // q -> target id
+  let draftName = "";
+
+  function renderPhone() {
+    const me = store.get(meKey());
+    const stillHere = me && S.participants.some(p => p.id === me.id);
+    if (!stillHere) { if (me) store.del(meKey()); return renderJoin(); }
+
+    const head = `<div class="brand">Qui est le plus <b>susceptible</b> de…</div>
+      <div class="me"><span class="who">Connecté·e : <b>${esc(me.name)}</b></span>
+      <button class="link" id="logout">Ce n'est pas moi</button></div>`;
+    let body = "";
+    const qs = S.questions || [];
+    const qText = esc(qs[S.q] || "");
+
+    if (S.phase === "lobby") {
+      body = `<div class="wait"><div class="pulse"></div><p class="h1">C'est noté&nbsp;!</p>
+        <p class="sub">${plural(S.participants.length, "participant")} pour l'instant.<br>La première question arrive sur l'écran.</p></div>`;
+    } else if (S.phase === "vote") {
+      const sel = myVoteCache[S.round + ":" + S.q];
+      body = `<p class="q"><span class="lead">Question ${S.q + 1} / ${qs.length}</span>${qText}</p>
+        <div class="names">${S.participants.map(p => `<button class="name${p.id === sel ? " sel" : ""}" data-id="${p.id}">${esc(p.name)}${p.id === me.id ? "<small>(moi)</small>" : ""}</button>`).join("")}</div>
+        <div class="status${sel ? " ok" : ""}" id="vstat">${sel ? "✓ Vote enregistré — vous pouvez changer d'avis jusqu'à la révélation." : "Touchez un nom pour voter. Votre vote reste anonyme."}</div>`;
+      if (sel === undefined) loadMyVote(me.id);
+    } else if (S.phase === "reveal") {
+      const w = winners(S.results);
+      body = `<p class="q"><span class="lead">Question ${S.q + 1} / ${qs.length}</span>${qText}</p>
+        <div class="winner-card">${w.names.length
+          ? `<div class="tag">${w.names.length > 1 ? "Égalité" : "Et c'est…"}</div><div class="w">${esc(joinNames(w.names))}</div><div class="sub">${plural(w.n, "vote")}</div>`
+          : `<div class="sub">Aucun vote sur cette question.</div>`}</div>
+        <p class="sub" style="text-align:center">Regardez l'écran 👀</p>`;
+    } else if (S.phase === "end") {
+      body = `<p class="h1">Le palmarès</p>${palmares("palm")}`;
+    }
+    app.innerHTML = `<div class="phone">${head}${body}</div>`;
+    document.getElementById("logout").onclick = () => { store.del(meKey()); renderJoin(); };
+    app.querySelectorAll(".name[data-id]").forEach(b => b.onclick = () => vote(me.id, b.dataset.id, b));
+  }
+
+  function palmares(cls) {
+    const qs = S.questions || [];
+    const h = S.history || [];
+    if (!h.length) return `<p class="sub">Aucun vote enregistré.</p>`;
+    if (cls === "palm") return `<ul class="palm">${h.map(x => `<li><div class="pq">${esc(qs[x.q] || "")}</div><div class="pw">${esc(joinNames(x.ids.map(nameOf)))}</div></li>`).join("")}</ul>`;
+    return `<div class="fgrid">${h.map((x, i) => `<div class="fitem" style="animation-delay:${i * 0.12}s"><div class="pq">${esc(qs[x.q] || "")}</div><div class="pw">${esc(joinNames(x.ids.map(nameOf)))} <span style="color:var(--muted);font-weight:600;font-size:.7em">· ${plural(x.n, "vote")}</span></div></div>`).join("")}</div>`;
+  }
+
+  async function loadMyVote(myId) {
+    const k = S.round + ":" + S.q;
+    myVoteCache[k] = null;
+    try {
+      const t = await rpc("my_vote", { p_room: ROOM, p_voter: myId, p_q: S.q });
+      if (t) { myVoteCache[k] = t; lastSig = ""; renderPhone(); }
+    } catch (e) { delete myVoteCache[k]; }
+  }
+
+  async function vote(myId, targetId, btn) {
+    if (busy) return; busy = true;
+    const k = S.round + ":" + S.q;
+    app.querySelectorAll(".name").forEach(b => b.classList.toggle("sel", b === btn));
+    const st = document.getElementById("vstat");
+    try {
+      const ok = await rpc("cast_vote", { p_room: ROOM, p_voter: myId, p_q: S.q, p_target: targetId });
+      if (ok) {
+        myVoteCache[k] = targetId;
+        st.className = "status ok"; st.textContent = "✓ Vote enregistré — vous pouvez changer d'avis jusqu'à la révélation.";
+        if (navigator.vibrate) navigator.vibrate(30);
+      } else {
+        st.className = "status err"; st.textContent = "Le vote est fermé pour cette question.";
+        poll();
+      }
+    } catch (e) {
+      st.className = "status err"; st.textContent = "Pas de connexion — réessayez.";
+      app.querySelectorAll(".name").forEach(b => b.classList.toggle("sel", b.dataset.id === myVoteCache[k]));
+    }
+    busy = false;
+  }
+
+  function namesBlock(others) {
+    return others.length ? `<p class="sub">Déjà inscrit·e ? Touchez votre nom :</p>
+        <div class="names">${others.map(p => `<button class="name" data-name="${esc(p.name)}">${esc(p.name)}</button>`).join("")}</div>` : "";
+  }
+  function bindNames() {
+    app.querySelectorAll(".name[data-name]").forEach(b => b.onclick = () => join(b.dataset.name));
+  }
+  function renderJoin() {
+    const others = S.participants;
+    const existing = document.getElementById("jnames");
+    if (existing && document.getElementById("jf")) { existing.innerHTML = namesBlock(others); bindNames(); return; }
+    app.innerHTML = `<div class="phone">
+      <div class="brand">Qui est le plus <b>susceptible</b> de…</div>
+      <p class="h1">Bienvenue&nbsp;! Comment vous appelle-t-on&nbsp;?</p>
+      <p class="sub">Votre prénom apparaîtra dans la liste des personnes pour qui voter.</p>
+      <form class="field" id="jf"><input id="nm" maxlength="30" autocomplete="given-name" placeholder="Votre prénom" value="${esc(draftName)}" required><button class="btn" id="jb">Entrer</button></form>
+      <div id="jstat"></div>
+      <div id="jnames" style="display:flex;flex-direction:column;gap:12px">${namesBlock(others)}</div>
+    </div>`;
+    const inp = document.getElementById("nm");
+    inp.oninput = () => draftName = inp.value;
+    document.getElementById("jf").onsubmit = e => { e.preventDefault(); join(inp.value); };
+    bindNames();
+  }
+
+  async function join(name) {
+    name = (name || "").trim();
+    if (!name || busy) return;
+    busy = true;
+    const jb = document.getElementById("jb"); if (jb) jb.disabled = true;
+    try {
+      const id = await rpc("join_room", { p_room: ROOM, p_name: name });
+      store.set(meKey(), { id, name });
+      draftName = "";
+      busy = false; await poll(); lastSig = ""; renderPhone();
+    } catch (e) {
+      busy = false; if (jb) jb.disabled = false;
+      const st = document.getElementById("jstat");
+      if (st) st.innerHTML = `<div class="status err">Impossible de rejoindre : ${esc(e.message)}</div>`;
+    }
+  }
+
+  /* =================== STAGE (presenter) =================== */
+  let drawerOpen = false;
+
+  async function setPhase(q, phase) {
+    if (busy) return; busy = true;
+    try {
+      const ok = await rpc("admin_set", { p_room: ROOM, p_key: ADMIN, p_q: q, p_phase: phase });
+      if (!ok) showErr("Clé animateur invalide.");
+      await poll();
+    } catch (e) { showErr("Pas de connexion au serveur."); }
+    busy = false;
+  }
+  function next() {
+    const n = (S.questions || []).length;
+    if (S.phase === "lobby") return n && setPhase(0, "vote");
+    if (S.phase === "vote") return setPhase(S.q, "reveal");
+    if (S.phase === "reveal") return S.q + 1 < n ? setPhase(S.q + 1, "vote") : setPhase(S.q, "end");
+  }
+  function prev() {
+    if (S.phase === "end") return setPhase(S.q, "reveal");
+    if (S.phase === "reveal") return setPhase(S.q, "vote");
+    if (S.phase === "vote") return S.q > 0 ? setPhase(S.q - 1, "reveal") : setPhase(0, "lobby");
+  }
+
+  function renderStage() {
+    if (drawerOpen) { refreshDrawerPeople(); return; }
+    const qs = S.questions || [];
+    const np = S.participants.length;
+    let main = "", nextLabel = "";
+    const top = `<div class="top"><div class="brand">Qui est le plus <b>susceptible</b> de…</div>
+      <div class="counter"><b>${np}</b> ${np > 1 ? "participants" : "participant"}</div></div>`;
+
+    if (S.phase === "lobby") {
+      main = `<div class="lobby">
+        <div><h1 class="big-title">Qui est le plus <em>susceptible</em> de…&nbsp;?</h1>
+          <p class="join-hint">Scannez le QR code avec votre téléphone,<br>entrez votre <b>prénom</b>, et attendez la première question.</p>
+          <div class="chips">${S.participants.map(p => `<span class="chip">${esc(p.name)}</span>`).join("")}</div></div>
+        <div class="qrbox">${qr(joinUrl)}</div></div>`;
+      nextLabel = "Lancer la 1re question →";
+    } else if (S.phase === "vote") {
+      main = `<div class="qview"><div class="qnum">Question ${S.q + 1} / ${qs.length}</div>
+        <h1 class="qtext">${esc(qs[S.q] || "")}</h1>
+        <div class="votebar"><div class="lbl"><b>${S.voted}</b> / ${np} ${S.voted > 1 ? "ont voté" : "a voté"}</div>
+        <div class="dots">${S.participants.map((_, i) => `<span class="dot${i < S.voted ? " on" : ""}"></span>`).join("")}</div></div>
+        <div class="minijoin"><div class="mq">${qr(joinUrl)}</div><span>Pas encore connecté·e&nbsp;?<br>Scannez pour rejoindre</span></div></div>`;
+      nextLabel = "Révéler le résultat";
+    } else if (S.phase === "reveal") {
+      const res = S.results || [];
+      const w = winners(res);
+      const max = res.length ? res[0].n : 1;
+      main = `<div class="reveal">
+        <div><div class="qnum">Question ${S.q + 1} / ${qs.length}</div><h1 class="qtext">${esc(qs[S.q] || "")}</h1>
+          <div class="crown">${w.names.length
+            ? `<div class="tag">${w.names.length > 1 ? "Égalité&nbsp;!" : "Et c'est…"}</div><div class="w">${esc(joinNames(w.names))}</div><div class="n">${plural(w.n, "vote")} sur ${S.voted}</div>`
+            : `<div class="empty">Aucun vote sur cette question.</div>`}</div></div>
+        <div class="bars">${res.slice(0, 8).map(r => `<div class="bar${r.n === max ? " top1" : ""}"><span class="nm">${esc(nameOf(r.id))}</span><span class="track"><span class="fill" data-w="${(r.n / max) * 100}"></span></span><span class="ct">${r.n}</span></div>`).join("")}</div>
+      </div>`;
+      nextLabel = S.q + 1 < qs.length ? "Question suivante →" : "Voir le palmarès 🏆";
+    } else if (S.phase === "end") {
+      main = `<div class="final"><h2>Le <em>palmarès</em> du codir</h2>${palmares("grid")}</div>`;
+      nextLabel = "";
+    }
+
+    app.innerHTML = `<div class="stage">${top}<div class="main">${main}</div>
+      <div class="dock">
+        ${S.phase !== "lobby" ? `<button class="btn ghost" id="bprev">← Retour</button>` : ""}
+        ${nextLabel ? `<button class="btn" id="bnext">${nextLabel}</button>` : ""}
+        ${S.phase === "vote" || S.phase === "reveal" ? `<button class="btn ghost" id="bend">Terminer</button>` : ""}
+        <button class="btn ghost" id="bset">⚙ Réglages</button>
+        <button class="btn ghost" id="bfs">⛶ Plein écran</button>
+      </div></div>`;
+    const on = (id, f) => { const el = document.getElementById(id); if (el) el.onclick = f; };
+    on("bnext", next); on("bprev", prev);
+    on("bend", () => confirm("Terminer et afficher le palmarès ?") && setPhase(S.q, "end"));
+    on("bset", openDrawer);
+    on("bfs", () => document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen && document.documentElement.requestFullscreen());
+    requestAnimationFrame(() => setTimeout(() => app.querySelectorAll(".fill").forEach(f => f.style.width = f.dataset.w + "%"), 400));
+  }
+
+  document.addEventListener("keydown", e => {
+    if (!ADMIN || !S || drawerOpen || e.target.closest("input,textarea")) return;
+    if (e.key === "ArrowRight" || e.key === " " || e.key === "PageDown") { e.preventDefault(); next(); }
+    if (e.key === "ArrowLeft" || e.key === "PageUp") { e.preventDefault(); prev(); }
+  });
+
+  function openDrawer() {
+    drawerOpen = true;
+    const d = document.createElement("div");
+    d.className = "drawer"; d.id = "drawer";
+    d.innerHTML = `<div class="panel">
+      <div class="row" style="justify-content:space-between;align-items:center"><h3>Réglages</h3><button class="btn ghost" id="dclose">Fermer</button></div>
+      <div><h3 style="font-size:16px;margin-bottom:8px">Participants</h3>
+        <p class="note">Retirez un doublon ou une faute de frappe : la personne pourra se réinscrire.</p>
+        <div class="chips" id="dpeople" style="margin-top:10px"></div></div>
+      <div><h3 style="font-size:16px;margin-bottom:8px">Questions (une par ligne)</h3>
+        <textarea id="dq">${esc((S.questions || []).join("\n"))}</textarea>
+        <div class="row" style="margin-top:8px"><button class="btn" id="dsave">Enregistrer les questions</button></div></div>
+      <div><h3 style="font-size:16px;margin-bottom:8px">Nouvelle partie</h3>
+        <p class="note">Efface les votes et revient à l'accueil.</p>
+        <div class="row" style="margin-top:8px"><button class="btn ghost" id="dr1">Rejouer avec les mêmes participants</button><button class="btn ghost" id="dr2">Tout recommencer (participants inclus)</button></div></div>
+      <div><h3 style="font-size:16px;margin-bottom:8px">Lien participants</h3><p class="note"><code>${esc(joinUrl)}</code></p></div>
+    </div>`;
+    document.body.appendChild(d);
+    d.onclick = e => { if (e.target === d) closeDrawer(); };
+    document.getElementById("dclose").onclick = closeDrawer;
+    document.getElementById("dsave").onclick = async () => {
+      const lines = document.getElementById("dq").value.split("\n").map(s => s.trim()).filter(Boolean);
+      if (!lines.length) return showErr("Il faut au moins une question.");
+      try { const ok = await rpc("admin_questions", { p_room: ROOM, p_key: ADMIN, p_questions: lines }); if (!ok) showErr("Clé animateur invalide."); else closeDrawer(); }
+      catch (e) { showErr("Enregistrement impossible."); }
+    };
+    const reset = keep => async () => {
+      if (!confirm(keep ? "Effacer tous les votes et rejouer ?" : "Effacer votes ET participants ?")) return;
+      try { await rpc("admin_reset", { p_room: ROOM, p_key: ADMIN, p_keep_people: keep }); closeDrawer(); }
+      catch (e) { showErr("Réinitialisation impossible."); }
+    };
+    document.getElementById("dr1").onclick = reset(true);
+    document.getElementById("dr2").onclick = reset(false);
+    refreshDrawerPeople();
+  }
+  function refreshDrawerPeople() {
+    const box = document.getElementById("dpeople"); if (!box) return;
+    box.innerHTML = S.participants.length ? S.participants.map(p => `<span class="chip">${esc(p.name)}<button data-id="${p.id}" aria-label="Retirer ${esc(p.name)}">✕</button></span>`).join("") : `<p class="note">Personne pour l'instant.</p>`;
+    box.querySelectorAll("button[data-id]").forEach(b => b.onclick = async () => {
+      try { await rpc("admin_remove", { p_room: ROOM, p_key: ADMIN, p_id: b.dataset.id }); await poll(); } catch (e) { showErr("Suppression impossible."); }
+    });
+  }
+  function closeDrawer() {
+    drawerOpen = false;
+    const d = document.getElementById("drawer"); if (d) d.remove();
+    lastSig = ""; poll();
+  }
+
+  poll();
+  setInterval(poll, ADMIN ? 1000 : 1500);
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) poll(); });
+})();
+</script>
+</body>
+</html>
