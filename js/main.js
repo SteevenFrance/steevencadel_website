@@ -3,11 +3,11 @@
    ============================================================ */
 
 // ---- Nav scroll effect ----
-// Les pages à fond clair (nav--solid) gardent la barre opaque, sinon le menu blanc est invisible
+// Les pages à fond clair (nav--solid) gardent la barre opaque, sinon le menu blanc est invisible.
+// La classe peut être ajoutée en cours de route (quiz) : on la relit à chaque appel.
 const nav = document.getElementById('nav');
-const navSolid = nav.classList.contains('nav--solid');
 const onScroll = () => {
-  nav.classList.toggle('scrolled', navSolid || window.scrollY > 60);
+  nav.classList.toggle('scrolled', nav.classList.contains('nav--solid') || window.scrollY > 60);
 };
 window.addEventListener('scroll', onScroll, { passive: true });
 onScroll();

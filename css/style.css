@@ -12,6 +12,7 @@
   --blue:      #2D6FA3;
   --gold:      #C9A84C;
   --gold-dark: #b0913f;
+  --gold-text: #8B6D18; /* or foncé pour du petit texte sur fond clair (4,9:1 sur blanc) */
   --light:     #F5F7FA;
   --white:     #ffffff;
   --text:      #1A1A2E;
@@ -110,10 +111,12 @@ ul { list-style: none; }
   font-weight: 600;
   letter-spacing: .12em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--gold-text);
   margin-bottom: 12px;
 }
-.section-label--light { color: var(--gold); }
+/* Sur fond sombre, l'or d'origine reste le plus lisible */
+.section-label--light,
+.book-cta__inner .section-head__label { color: var(--gold); }
 .section-title,
 .section-head__title {
   font-size: clamp(1.75rem, 3vw, 2.5rem);
@@ -777,7 +780,8 @@ ul { list-style: none; }
   .footer__grid       { grid-template-columns: 1fr 1fr; }
 }
 
-@media (max-width: 768px) {
+/* Menu burger jusqu'à 1024 px : la barre complète ne tient pas sur tablette */
+@media (max-width: 1024px) {
   .nav__links         { display: none; flex-direction: column; align-items: stretch; position: absolute; top: 100%; left: 0; right: 0; background: var(--navy); padding: 8px 24px 20px; box-shadow: 0 12px 40px rgba(0,0,0,.25); gap: 0; border-radius: 0 0 var(--radius) var(--radius); text-align: center; z-index: 100; }
   .nav__links.open    { display: flex; animation: menuSlideDown .3s ease; }
   /* Liens en bloc pleine largeur : hauteur réelle (zone tactile) et séparateurs droits */
@@ -795,6 +799,9 @@ ul { list-style: none; }
   .nav__burger        { display: flex; }
   .nav                { background: transparent; }
   .nav.scrolled       { background: rgba(255,255,255,.96); }
+}
+
+@media (max-width: 768px) {
   .services__grid     { grid-template-columns: 1fr; }
   .methodes__grid     { grid-template-columns: 1fr; }
   .clients__grid      { grid-template-columns: 1fr; }
@@ -1323,9 +1330,11 @@ ul { list-style: none; }
 .book-promo :focus-visible { outline-color: var(--navy); }
 /* .faq-item coupe ce qui dépasse (overflow: hidden) : contour à l'intérieur */
 .faq-item__q:focus-visible { outline-offset: -3px; border-radius: var(--radius); }
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .nav__links :focus-visible { outline-color: var(--white); }
 }
+/* Un élément atteint au clavier ne doit pas finir caché sous la barre fixe */
+a, button, input, select, textarea, summary { scroll-margin-top: 100px; }
 
 /* ============================================================
    BOOK SALES PAGE
@@ -1689,6 +1698,9 @@ ul { list-style: none; }
 .quiz-section {
   padding: 60px 0 80px;
 }
+/* questionnaire.html : le bandeau sombre est masqué pendant le quiz, le contenu démarre sous la barre fixe */
+.quiz-active .quiz-section,
+.quiz-active .quiz-results { padding-top: 130px; }
 .quiz-section .container {
   max-width: 680px;
 }

@@ -113,8 +113,17 @@ const barEl        = document.getElementById('quiz-bar');
 const currentLabel = document.getElementById('quiz-current');
 const retakeBtn    = document.getElementById('quiz-retake');
 
+// Sans le bandeau sombre, la page commence sur fond blanc : barre de menu opaque
+// et contenu décalé sous la barre fixe (classe quiz-active).
+function setQuizMode(on) {
+  document.body.classList.toggle('quiz-active', on);
+  document.getElementById('nav').classList.toggle('nav--solid', on);
+  window.dispatchEvent(new Event('scroll'));
+}
+
 if (startBtn) {
   startBtn.addEventListener('click', () => {
+    setQuizMode(true);
     heroEl.style.display = 'none';
     sectionEl.style.display = 'block';
     renderQuestion();
@@ -203,6 +212,7 @@ if (retakeBtn) {
     scores = [];
     resultsEl.style.display = 'none';
     heroEl.style.display = '';
+    setQuizMode(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 }
