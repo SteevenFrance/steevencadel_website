@@ -1333,8 +1333,9 @@ ul { list-style: none; }
 @media (max-width: 1024px) {
   .nav__links :focus-visible { outline-color: var(--white); }
 }
-/* Un élément atteint au clavier ne doit pas finir caché sous la barre fixe */
-a, button, input, select, textarea, summary { scroll-margin-top: 100px; }
+/* Un élément atteint au clavier (ou une ancre) ne doit pas finir caché sous la barre fixe de 70 px.
+   scroll-margin sur les éléments n'est pas pris en compte par Chrome lors du focus, scroll-padding l'est. */
+html { scroll-padding-top: 80px; }
 
 /* ============================================================
    BOOK SALES PAGE
@@ -1354,6 +1355,8 @@ a, button, input, select, textarea, summary { scroll-margin-top: 100px; }
   align-items: center;
 }
 .book-hero__grid > * { min-width: 0; }
+/* Le bouton du test est long : il passe à la ligne quand la colonne est étroite (769-797 px) */
+.book-hero__content .btn { white-space: normal; text-align: center; }
 .book-hero__cover img {
   width: 100%;
   border-radius: var(--radius);
