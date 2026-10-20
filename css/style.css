@@ -16,7 +16,7 @@
   --white:     #ffffff;
   --text:      #1A1A2E;
   --text-mid:  #4B5563;
-  --text-light:#9CA3AF;
+  --text-light:#6B7280;
   --border:    #E5E7EB;
   --radius:    12px;
   --radius-lg: 20px;
@@ -102,7 +102,8 @@ ul { list-style: none; }
 
 /* ---- Section Headers ---- */
 .section-head { text-align: center; margin-bottom: 64px; }
-.section-label {
+.section-label,
+.section-head__label {
   display: inline-block;
   font-family: 'Poppins', sans-serif;
   font-size: .75rem;
@@ -113,14 +114,16 @@ ul { list-style: none; }
   margin-bottom: 12px;
 }
 .section-label--light { color: var(--gold); }
-.section-title {
+.section-title,
+.section-head__title {
   font-size: clamp(1.75rem, 3vw, 2.5rem);
   font-weight: 700;
   color: var(--navy);
   margin-bottom: 16px;
 }
 .section-title--light { color: var(--white); }
-.section-sub {
+.section-sub,
+.section-head__sub {
   font-size: 1.05rem;
   color: var(--text-mid);
   max-width: 560px;
@@ -242,6 +245,8 @@ ul { list-style: none; }
   gap: 64px;
   align-items: center;
 }
+/* Empêche un bouton long d'élargir la colonne au-delà de l'écran */
+.hero__container > * { min-width: 0; }
 .hero__label {
   font-family: 'Poppins', sans-serif;
   font-size: .75rem;
@@ -792,6 +797,7 @@ ul { list-style: none; }
   .footer__bottom     { flex-direction: column; gap: 12px; text-align: center; }
   .section            { padding: 64px 0; }
   .hero__stats        { gap: 24px; flex-wrap: wrap; justify-content: center; }
+  .btn                { white-space: normal; text-align: center; }
 }
 
 @media (max-width: 480px) {
@@ -1276,6 +1282,40 @@ ul { list-style: none; }
   transform: none;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+  .fade-in { opacity: 1; transform: none; }
+}
+
+/* ============================================================
+   FOCUS CLAVIER
+   ============================================================ */
+:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+/* Sur fond sombre, le bleu ne ressort pas : on passe en or */
+.nav:not(.scrolled) :focus-visible,
+.hero :focus-visible,
+.page-header :focus-visible,
+.section--dark :focus-visible,
+.photo-banner :focus-visible,
+.diag-cta__inner :focus-visible,
+.quiz-hero :focus-visible,
+.book-hero :focus-visible,
+.footer :focus-visible {
+  outline-color: var(--gold);
+}
+.book-promo :focus-visible { outline-color: var(--navy); }
+@media (max-width: 768px) {
+  .nav__links :focus-visible { outline-color: var(--gold); }
+}
+
 /* ============================================================
    BOOK SALES PAGE
    ============================================================ */
@@ -1293,6 +1333,7 @@ ul { list-style: none; }
   gap: 64px;
   align-items: center;
 }
+.book-hero__grid > * { min-width: 0; }
 .book-hero__cover img {
   width: 100%;
   border-radius: var(--radius);
@@ -2621,9 +2662,9 @@ ul { list-style: none; }
 .diag-cta__alt {
   margin-top: 12px;
   font-size: .9rem;
-  color: var(--text-mid);
+  color: rgba(255,255,255,.75);
 }
-.diag-cta__alt a { text-decoration: underline; }
+.diag-cta__alt a { color: var(--white); text-decoration: underline; }
 
 /* ============ PAGE MERCI ============ */
 .thanks-page {

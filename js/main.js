@@ -3,9 +3,11 @@
    ============================================================ */
 
 // ---- Nav scroll effect ----
+// Les pages à fond clair (nav--solid) gardent la barre opaque, sinon le menu blanc est invisible
 const nav = document.getElementById('nav');
+const navSolid = nav.classList.contains('nav--solid');
 const onScroll = () => {
-  nav.classList.toggle('scrolled', window.scrollY > 60);
+  nav.classList.toggle('scrolled', navSolid || window.scrollY > 60);
 };
 window.addEventListener('scroll', onScroll, { passive: true });
 onScroll();
@@ -13,12 +15,20 @@ onScroll();
 // ---- Mobile burger ----
 const burger = document.getElementById('burger');
 const navLinks = document.getElementById('nav-links');
-burger.addEventListener('click', () => {
-  navLinks.classList.toggle('open');
-  burger.setAttribute('aria-expanded', navLinks.classList.contains('open'));
-});
+const setMenu = (open) => {
+  navLinks.classList.toggle('open', open);
+  burger.setAttribute('aria-expanded', open);
+  burger.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+};
+burger.addEventListener('click', () => setMenu(!navLinks.classList.contains('open')));
 navLinks.querySelectorAll('a').forEach(a => {
-  a.addEventListener('click', () => navLinks.classList.remove('open'));
+  a.addEventListener('click', () => setMenu(false));
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && navLinks.classList.contains('open')) {
+    setMenu(false);
+    burger.focus();
+  }
 });
 
 // ---- Fade-in on scroll ----
@@ -59,11 +69,13 @@ if (form) {
 
     try {
       const data = new FormData(form);
-      await fetch('/', {
+      const res = await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams(data).toString()
       });
+      // fetch ne lève pas d'erreur sur un 4xx/5xx : sans ce test, un échec redirigerait vers « Merci »
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
       if (window.plausible) plausible('Formulaire Contact');
       window.location.href = '/merci.html';
     } catch (err) {
